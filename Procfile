@@ -1,0 +1,1 @@
+web: cp config.example.js config.js && ./kiwi -f

@@ -19,7 +19,7 @@ conf.servers = [];
 
 // Example server block
 conf.servers.push({
-    port:   7778,
+    port:   process.env.PORT || 7788,
     address: "0.0.0.0"
 });
 
@@ -124,13 +124,13 @@ conf.reject_unauthorised_certificates = false;
  */
 
 // Whitelisted HTTP proxies in CIDR format
-conf.http_proxies = ["127.0.0.1/32"];
+conf.http_proxies = ["127.0.0.1/32", "10.0.0.0/8"];
 
 // Header that contains the real-ip from the HTTP proxy
 conf.http_proxy_ip_header = "x-forwarded-for";
 
 // Base HTTP path to the KIWI IRC client (eg. /kiwi)
-conf.http_base_path = "/kiwi";
+conf.http_base_path = "";
 
 
 /*
@@ -163,15 +163,15 @@ conf.socks_proxy.pass = null;
 
 
 // Default quit message
-conf.quit_message = "http://www.kiwiirc.com/ - A hand-crafted IRC client";
+conf.quit_message = process.env.QUIT_MESSAGE || "http://www.kiwiirc.com/ - A hand-crafted IRC client";
 
 
 // Default settings for the client. These may be changed in the browser
 conf.client = {
-    server: 'irc.kiwiirc.com',
-    port:    6697,
+    server:  process.env.DEFAULT_SERVER || 'irc.kiwiirc.com',
+    port:    process.env.DEFAULT_PORT || 6697,
     ssl:     true,
-    channel: '#kiwiirc',
+    channel: process.env.DEFAULT_CHANNEL || '#kiwiirc',
     channel_key: '',
     nick:    'kiwi_?',
     settings: {
